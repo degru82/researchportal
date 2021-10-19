@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include 
+from .views import welcomePageView
 
 urlpatterns = [
+    path('', welcomePageView, name='welcome'),
     path('admin/', admin.site.urls),
     path('rssfeeds/', include('rssfeeds.urls')),
 ]
