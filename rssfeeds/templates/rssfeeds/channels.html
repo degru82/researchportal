@@ -23,7 +23,11 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
     {% for chn in channels %}
         {% for fd in chn.contents %}
             <tr>
-                <td> {{ chn.name }}</td>
+                <td>
+                    <a href="{% url 'channel-detail' chn.link %}">
+                        {{ chn.name }}
+                    </a>
+                </td>
                 <td> {{ fd.title }} </td>
                 <td> {{ fd.description }} </td>
             </tr>

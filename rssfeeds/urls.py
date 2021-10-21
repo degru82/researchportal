@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.welcomePageView, name='welcome-page'),
-    path('channels/', views.show_channels, name='show-channels'),
-    path('channels/ch/', views.show_singlechannel, name='show-singlechannel')
+    path('channel/', views.show_channels, name='channel-list'),
+    path('channel/<str:link_id>/', views.show_singlechannel, name='channel-detail')
 ]

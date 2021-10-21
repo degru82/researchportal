@@ -5,6 +5,7 @@ from django.shortcuts import render
 feed_list = [
     {
         'name': 'transport feed', 
+        'link': 'trns_fd',
         'contents': [
             {
                 'title': 'transport title 1',
@@ -22,6 +23,7 @@ feed_list = [
     },
     {
         'name': 'health feed',
+        'link': 'hlth_fd',
         'contents': [ 
             {
                 'title': 'health title 1',
@@ -39,6 +41,7 @@ feed_list = [
     },
     {
         'name': 'town feed',
+        'link': 'town_fd',
         'contents': [ 
             {
                 'title': 'town title 1',
@@ -62,9 +65,19 @@ def show_channels(request):
     } 
     return render(request, 'rssfeeds/channels.html', context)
 
-def show_singlechannel(request):
+def show_singlechannel(request, link_id):
 
-    context = {}
+    feed_obj = None
+    for fd in feed_list:
+        if link_id == fd['link']:
+            feed_obj = fd
+            break
+    else:
+        print('------')
+        print(link_id)
+        return render(request, 'rssfeeds/error.html', {'err_msg': "Channel id is not valid" + link_id})
+
+    context = feed_obj
     return render(request, 'rssfeeds/single_channel.html', context)
 
 def welcomePageView(request):
