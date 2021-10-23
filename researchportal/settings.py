@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'rssfeeds.apps.RssfeedsConfig',
+    'subscribers.apps.SubscribersConfig',
 ]
 
 MIDDLEWARE = [
