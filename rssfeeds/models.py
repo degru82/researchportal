@@ -21,3 +21,6 @@ class FeedItem(models.Model):
     link = models.CharField(max_length=2000, null=True, blank=True)
     pub_date = models.DateTimeField()
     author = models.CharField(max_length=100)
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, primary_key=True, editable=False
+    )
