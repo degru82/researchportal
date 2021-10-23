@@ -3,11 +3,39 @@
 {% block content %}
 
 <h1>
-    {{ name }}
+    {{ channel_detail.title }}
 </h1>
+<hr/>
+<div>
+    <p>
+        {{ channel_detail.description }}
+    </p>
+    <a href="{{ channel_detail.link }}">
+        External Link
+    </a>
+</div>
 
-<p>
-    {{ contents }}
-</p>
+<hr/>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Published</th>
+        <th>Author</th>
+        <th>Link</th>
+    </tr>
+    {% for itm in feed_items %}
+        <tr>
+            <td>{{ itm.title }}</td>
+            <td>{{ itm.pub_date }}</td>
+            <td>{{ itm.author }}</td>
+            <td>
+                <a href="{{ itm.link }}">
+                    Go to external link
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 
 {% endblock content %}

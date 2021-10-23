@@ -15,23 +15,25 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 <table>
     <tr>
-        <th>Source</th>
         <th>Title</th>
         <th>Description</th>
+        <th>Link</th>
     </tr>
 
     {% for chn in channels %}
-        {% for fd in chn.contents %}
-            <tr>
-                <td>
-                    <a href="{% url 'channel-detail' chn.link %}">
-                        {{ chn.name }}
-                    </a>
-                </td>
-                <td> {{ fd.title }} </td>
-                <td> {{ fd.description }} </td>
-            </tr>
-        {% endfor %}
+        <tr>
+            <td>
+                <a href="{% url 'channel-detail' chn.id %}">
+                    {{ chn.title }}
+                </a>
+            </td>
+            <td>{{ chn.description }}</td>
+            <td>
+                <a href={{ chn.link }}>
+                    Ext. Link
+                </a>
+            </td>
+        </tr>
     {% endfor %}
 
 </table>

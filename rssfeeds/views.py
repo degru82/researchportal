@@ -1,83 +1,32 @@
 from django.shortcuts import render
+from .models import RssFeed, FeedItem
 
 # Create your views here.
-
-feed_list = [
-    {
-        'name': 'transport feed', 
-        'link': 'trns_fd',
-        'contents': [
-            {
-                'title': 'transport title 1',
-                'description': 'transport description 1',
-            },
-            {
-                'title': 'transport title 2',
-                'description': 'transport description 2',
-            },
-            {
-                'title': 'transport title 3',
-                'description': 'transport description 3',
-            },
-        ]
-    },
-    {
-        'name': 'health feed',
-        'link': 'hlth_fd',
-        'contents': [ 
-            {
-                'title': 'health title 1',
-                'description': 'health description 1',
-            },
-            {
-                'title': 'health title 2',
-                'description': 'health description 2',
-            },
-            {
-                'title': 'health title 3',
-                'description': 'health description 3',
-            },
-        ]
-    },
-    {
-        'name': 'town feed',
-        'link': 'town_fd',
-        'contents': [ 
-            {
-                'title': 'town title 1',
-                'description': 'town description 1',
-            },
-            {
-                'title': 'town title 2',
-                'description': 'health description 2',
-            },
-            {
-                'title': 'town title 3',
-                'description': 'town description 3',
-            },
-        ]
-    },
-]
-
 def show_channels(request):
     context = {
-        'channels': feed_list
+        'channels': RssFeed.objects.all()
     } 
     return render(request, 'rssfeeds/channels.html', context)
 
-def show_singlechannel(request, link_id):
+def show_singlechannel(request, channel_id):
 
-    feed_obj = None
-    for fd in feed_list:
-        if link_id == fd['link']:
-            feed_obj = fd
-            break
-    else:
-        print('------')
-        print(link_id)
-        return render(request, 'rssfeeds/error.html', {'err_msg': "Channel id is not valid" + link_id})
+    channel_detail = RssFeed.objects.get(id=channel_id)
+    feed_items = FeedItem.objects.filter(feed_belongs_to=channel_id)
 
-    context = feed_obj
+    context = {
+        'channel_detail': channel_detail,
+        'feed_items': feed_items
+    }
+
+    if not channel_detail:
+        return render(
+            request, 
+            'rssfeeds/error.html', 
+            {
+                'err_msg': "Channel id is not valid" + link_id
+            }
+        )
+
     return render(request, 'rssfeeds/single_channel.html', context)
 
 def welcomePageView(request):
