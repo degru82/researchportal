@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.welcomePageView, name='welcome-page'),
     path('channel/', views.show_channels, name='channel-list'),
-    path('channel/<str:channel_id>/', views.show_singlechannel, name='channel-detail')
+    path('channel/new', views.enroll_channel, name='new-channel'),
+    path('channel/<str:channel_id>/', views.show_singlechannel, name='channel-detail'),
 ]

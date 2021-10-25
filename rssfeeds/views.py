@@ -1,12 +1,22 @@
 from django.shortcuts import render
 from .models import RssFeed, FeedItem
+from .forms import RssFeedForm
 
 # Create your views here.
 def show_channels(request):
+
     context = {
         'channels': RssFeed.objects.all()
     } 
+
     return render(request, 'rssfeeds/channels.html', context)
+
+def enroll_channel(request):
+
+    form = RssFeedForm()
+    context = {'form': form}
+
+    return render(request, 'rssfeeds/feed_enroll_form.html', context)
 
 def show_singlechannel(request, channel_id):
 
