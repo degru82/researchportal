@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import RssFeed, FeedItem
 from .forms import RssFeedForm
 
@@ -12,6 +12,12 @@ def show_channels(request):
     return render(request, 'rssfeeds/channels.html', context)
 
 def enroll_channel(request):
+
+    if request.method == 'POST':
+        form = RssFeedForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('channel-list')
 
     form = RssFeedForm()
     context = {'form': form}
