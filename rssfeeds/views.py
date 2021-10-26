@@ -24,6 +24,21 @@ def enroll_channel(request):
 
     return render(request, 'rssfeeds/feed_enroll_form.html', context)
 
+def update_channel(request, channel_id):
+
+    feed = RssFeed.objects.get(id=channel_id)
+
+    if request.method == 'POST':
+        form = RssFeedForm(request.POST, instance=feed)
+        if form.is_valid():
+            form.save()
+            return redirect('channel-list')
+
+    form = RssFeedForm(instance=feed)
+    context = {'form': form}
+
+    return render(request, 'rssfeeds/feed_enroll_form.html', context)
+
 def show_singlechannel(request, channel_id):
 
     channel_detail = RssFeed.objects.get(id=channel_id)
