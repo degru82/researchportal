@@ -39,6 +39,18 @@ def update_channel(request, channel_id):
 
     return render(request, 'rssfeeds/feed_enroll_form.html', context)
 
+def delete_channel(request, channel_id):
+    feed = RssFeed.objects.get(id=channel_id)
+
+    if request.method == 'POST':
+        feed.delete()
+        return redirect('channel-list')
+
+    context = {
+        'object': feed.title
+    }
+    return render(request, 'rssfeeds/delete_template.html', context)
+
 def show_singlechannel(request, channel_id):
 
     channel_detail = RssFeed.objects.get(id=channel_id)

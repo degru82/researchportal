@@ -44,6 +44,10 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                 <a href="{% url 'update-channel' chn.id %}">
                     Edit
                 </a>
+                |
+                <a href="{% url 'delete-channel' chn.id %}">
+                    Del.
+                </a>
             </td>
         </tr>
     {% endfor %}
