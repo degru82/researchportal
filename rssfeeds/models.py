@@ -7,6 +7,9 @@ class RssFeed(models.Model):
     link = models.CharField(max_length=2000, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    feed_image = models.ImageField(
+        null=True, blank=True, default='rssfeed.png', upload_to='rssfeeds'
+    )
     id = models.UUIDField(
         default=uuid.uuid4, unique=True, primary_key=True, editable=False
     )

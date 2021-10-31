@@ -14,7 +14,7 @@ def show_channels(request):
 def enroll_channel(request):
 
     if request.method == 'POST':
-        form = RssFeedForm(request.POST)
+        form = RssFeedForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('channel-list')
@@ -29,7 +29,7 @@ def update_channel(request, channel_id):
     feed = RssFeed.objects.get(id=channel_id)
 
     if request.method == 'POST':
-        form = RssFeedForm(request.POST, instance=feed)
+        form = RssFeedForm(request.POST, request.FILES, instance=feed)
         if form.is_valid():
             form.save()
             return redirect('channel-list')
