@@ -24,6 +24,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
         <th>Title</th>
         <th>Description</th>
         <th>Link</th>
+        <th>Action</th>
     </tr>
 
     {% for chn in channels %}
@@ -35,8 +36,17 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
             </td>
             <td>{{ chn.description }}</td>
             <td>
-                <a href={{ chn.link }}>
+                <a href="{{ chn.link }}">
                     Ext. Link
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'update-channel' chn.id %}">
+                    Edit
+                </a>
+                |
+                <a href="{% url 'delete-channel' chn.id %}">
+                    Del.
                 </a>
             </td>
         </tr>

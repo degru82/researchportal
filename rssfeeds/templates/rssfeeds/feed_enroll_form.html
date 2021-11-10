@@ -2,10 +2,14 @@
 
 {% block content %}
 <h1>Add a New RSS Feed</h1>
-<form method="POST">
+
+<img src='{{form.feed_image}}'/>
+
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit">
+
+    <input type="submit" value="Enroll!"/>
 
 </form>
 

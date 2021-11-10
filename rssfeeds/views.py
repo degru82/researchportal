@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import RssFeed, FeedItem
 from .forms import RssFeedForm
 
@@ -13,10 +13,43 @@ def show_channels(request):
 
 def enroll_channel(request):
 
+    if request.method == 'POST':
+        form = RssFeedForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('channel-list')
+
     form = RssFeedForm()
     context = {'form': form}
 
     return render(request, 'rssfeeds/feed_enroll_form.html', context)
+
+def update_channel(request, channel_id):
+
+    feed = RssFeed.objects.get(id=channel_id)
+
+    if request.method == 'POST':
+        form = RssFeedForm(request.POST, request.FILES, instance=feed)
+        if form.is_valid():
+            form.save()
+            return redirect('channel-list')
+
+    form = RssFeedForm(instance=feed)
+    context = {'form': form}
+
+    return render(request, 'rssfeeds/feed_enroll_form.html', context)
+
+def delete_channel(request, channel_id):
+    feed = RssFeed.objects.get(id=channel_id)
+
+    if request.method == 'POST':
+        feed.delete()
+        return redirect('channel-list')
+
+    context = {
+        'object': feed.title
+    }
+    return render(request, 'rssfeeds/delete_template.html', context)
 
 def show_singlechannel(request, channel_id):
 
