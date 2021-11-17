@@ -12,7 +12,7 @@ class Subscriber(models.Model):
     intro = models.TextField(null=True, blank=True)
     profile_image = models.ImageField(
         null=True, blank=True,
-        upload_to='subscribers',
+        upload_to='subscribers/',
         default='profile.png'
     )
     personal_interests = models.ManyToManyField(
@@ -20,7 +20,7 @@ class Subscriber(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return str(self.user.username)
 
 
 class InterestKeyword(models.Model):

@@ -1,6 +1,8 @@
 from django.db import models
 import uuid
 
+from subscribers.models import Subscriber
+
 # Create your models here.
 class RssFeed(models.Model):
     title = models.CharField(max_length=200)
@@ -13,6 +15,7 @@ class RssFeed(models.Model):
     id = models.UUIDField(
         default=uuid.uuid4, unique=True, primary_key=True, editable=False
     )
+    created_by = models.ForeignKey(Subscriber, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title
