@@ -1,61 +1,7 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content %}
-
-<h1>RSS Feed Channels</h1>
-
-<p>
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-</p>
-<hr/>
-<p>
-
-    {{ a }}
-</p>
-
-<button>
-    <a href="{% url 'new-channel' %}">
-        Enroll New!
-    </a>
-</button>
-
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Created by</th>
-        <th>Link</th>
-        <th>Action</th>
-    </tr>
-
-    {% for chn in channels %}
-        <tr>
-            <td>
-                <a href="{% url 'channel-detail' chn.id %}">
-                    {{ chn.title }}
-                </a>
-            </td>
-            <td>{{ chn.description }}</td>
-            <td>{{ chn.created_by }}</td>
-            <td>
-                <a href="{{ chn.link }}">
-                    Ext. Link
-                </a>
-            </td>
-            <td>
-                <a href="{% url 'update-channel' chn.id %}">
-                    Edit
-                </a>
-                |
-                <a href="{% url 'delete-channel' chn.id %}">
-                    Del.
-                </a>
-            </td>
-        </tr>
-    {% endfor %}
-
-</table>
-
 
   <!-- Main Section -->
   <main class="projects">
@@ -88,16 +34,19 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
           <div class="column">
             <div class="card project">
-              <a href="single-project.html" class="project">
-                <img class="project__thumbnail" src="images/project-a.png" alt="project thumbnail" />
+              <a href="{% url 'channel-detail' chn.id %}" class="project">
+                <img class="project__thumbnail" src="{% static chn.feed_image %}" alt="project thumbnail" />
                 <div class="card__body">
-                  <h3 class="project__title">Yoga Studio Landing Page Website and Design</h3>
-                  <p><a class="project__author" href="profile.html">By Dennis Ivanov</a></p>
-                  <p class="project--rating">
+                  <h3 class="project__title">{{ chn.title }}</h3>
+                  <p>
+                    <!-- <a class="project__author" href="profile.html"></a> -->
+                    {{ chn.created_by }}
+                  </p>
+                  <!-- <p class="project--rating">
                     <span style="font-weight: bold;">98%</span> Postitive
                     Feedback (72 Votes)
-                  </p>
-                  <div class="project__tags">
+                  </p> -->
+                  <!-- <div class="project__tags">
                     <span class="tag tag--pill tag--main">
                       <small>NextJS</small>
                     </span>
@@ -107,34 +56,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     <span class="tag tag--pill tag--main">
                       <small>TypeScript</small>
                     </span>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="column">
-            <div class="card project">
-              <a href="single-project.html" class="project">
-                <img class="project__thumbnail" src="images/project-b.png" alt="project thumbnail" />
-                <div class="card__body">
-                  <h3 class="project__title">DevSearch UI Design</h3>
-                  <p><a class="project__author" href="profile.html">By Shahriar P. Shuvo</a></p>
-                  <p class="project--rating">
-                    <span style="font-weight: bold;">92%</span> Postitive
-                    Feedback (62 Votes)
-                  </p>
-                  <div class="project__tags">
-                    <span class="tag tag--pill tag--main">
-                      <small>NextJS</small>
-                    </span>
-                    <span class="tag tag--pill tag--main">
-                      <small>GraphQL</small>
-                    </span>
-                    <span class="tag tag--pill tag--main">
-                      <small>TypeScript</small>
-                    </span>
-                  </div>
+                  </div> -->
                 </div>
               </a>
             </div>

@@ -66,7 +66,7 @@ def show_singlechannel(request, channel_id):
             request, 
             'rssfeeds/error.html', 
             {
-                'err_msg': "Channel id is not valid" + link_id
+                'err_msg': "Channel id is not valid" + channel_id
             }
         )
 
