@@ -17,6 +17,9 @@ class RssFeed(models.Model):
     )
     created_by = models.ForeignKey(Subscriber, null=True, blank=True, on_delete=models.SET_NULL)
 
+    def image(self):
+        return self.feed_image.url
+
     def __str__(self):
         return self.title
 
